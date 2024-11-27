@@ -57,15 +57,15 @@ public class Validator {
 
     /**
      * Validates the payment status of the member.
-     * The status must be one of the predefined PaymentStatus values.
+     * The status must be one of the predefined MemberPaymentStatus values.
      *
      * @param paymentStatus The payment status to validate.
      * @return true if the payment status is valid, false otherwise.
      */
-    public static boolean isValidPaymentStatus(PaymentStatus paymentStatus) {
-        return paymentStatus == PaymentStatus.COMPLETE ||
-                paymentStatus == PaymentStatus.PENDING ||
-                paymentStatus == PaymentStatus.FAILED;
+    public static boolean isValidPaymentStatus(MemberPaymentStatus paymentStatus) {
+        return paymentStatus == MemberPaymentStatus.ALL_BILLS_PAID ||
+                paymentStatus == MemberPaymentStatus.PENDING_PAYMENT ||
+                paymentStatus == MemberPaymentStatus.MISSING_PAYMENT;
     }
 
     /**
@@ -110,7 +110,7 @@ public class Validator {
      */
     public static void validateMemberData(String name, int age, String membershipType,
                                           String email, String city, String street, String region, int zipcode, int phoneNumber,
-                                          MembershipStatus membershipStatus, PaymentStatus paymentStatus) throws IllegalArgumentException {
+                                          MembershipStatus membershipStatus, MemberPaymentStatus paymentStatus) throws IllegalArgumentException {
         if (!isValidName(name)) {
             throw new IllegalArgumentException("Invalid name: Name cannot be null or empty.");
         }
@@ -131,7 +131,7 @@ public class Validator {
             throw new IllegalArgumentException("Invalid membership status: Must be 'ACTIVE' or 'PASSIVE'.");
         }
         if (!isValidPaymentStatus(paymentStatus)) {
-            throw new IllegalArgumentException("Invalid payment status: Must be 'COMPLETE', 'PENDING', or 'FAILED'.");
+            throw new IllegalArgumentException("Invalid payment status: Must be 'ALL_BILLS_PAID', 'PENDING_PAYMENT', or 'NO_PAYMENTS'.");
         }
     }
 }

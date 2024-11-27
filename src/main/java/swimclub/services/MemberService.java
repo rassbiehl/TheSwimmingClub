@@ -38,7 +38,7 @@ public class MemberService {
             Validator.validateMemberData(member.getName(), member.getAge(),
                     member.getMembershipType().toString(), member.getEmail(), member.getCity(), member.getStreet(),
                     member.getRegion(), member.getZipcode(), member.getPhoneNumber(),
-                    member.getMembershipStatus(), member.getPaymentStatus());
+                    member.getMembershipStatus(), member.getMemberPaymentStatus());
         } catch (IllegalArgumentException e) {
             System.out.println("Error registering member: " + e.getMessage());
             return; // Don't proceed if validation fails
@@ -66,7 +66,7 @@ public class MemberService {
             Validator.validateMemberData(updatedMember.getName(), updatedMember.getAge(),
                     updatedMember.getMembershipType().toString(), updatedMember.getEmail(), updatedMember.getCity(),
                     updatedMember.getStreet(), updatedMember.getRegion(), updatedMember.getZipcode(),
-                    updatedMember.getPhoneNumber(), updatedMember.getMembershipStatus(), updatedMember.getPaymentStatus());
+                    updatedMember.getPhoneNumber(), updatedMember.getMembershipStatus(), updatedMember.getMemberPaymentStatus());
         } catch (IllegalArgumentException e) {
             // Handle the validation exception and log the error
             System.out.println("Error updating member: " + e.getMessage());
@@ -125,6 +125,7 @@ public class MemberService {
      * @param paymentStatus The status of the payment (e.g., COMPLETE, PENDING).
      * @param amount The amount of the payment.
      */
+    /*
     public void registerPayment(int memberId, PaymentStatus paymentStatus, double amount) {
         Member member = repository.findById(memberId);
         if (member == null) {
@@ -137,12 +138,13 @@ public class MemberService {
         // PaymentRepository.save(newPayment); // Save the payment in the repository
         System.out.println("Payment registered for member ID: " + memberId);
     }
-
+*/
     /**
      * Views all payments made by a specific member.
      *
      * @param memberId The ID of the member whose payments are to be retrieved.
      */
+
     public void viewPaymentsForMember(int memberId) {
         Member member = repository.findById(memberId);
         if (member == null) {

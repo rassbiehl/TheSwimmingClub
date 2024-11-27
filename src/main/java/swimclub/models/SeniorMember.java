@@ -19,13 +19,13 @@ public class SeniorMember extends Member {
      * @param zipcode       The zip code of the member's address.
      * @param membershipType The type of membership (e.g., Competitive Senior, Exercise Senior).
      * @param membershipStatus The membership status of the member.
-     * @param paymentStatus  Payment status type of the member.
+     * @param memberPaymentStatus  Payment status type of the member.
      * @param age           The age of the member (used to determine membership level).
      * @param phoneNumber   The phone number of the member.
      */
     public SeniorMember(String memberId, String name, String email, String city, String street, String region, int zipcode,
-                        MembershipType membershipType, MembershipStatus membershipStatus, PaymentStatus paymentStatus, int age, int phoneNumber) {
-        super(memberId, name, email, city, street, region, zipcode, membershipType, membershipStatus, paymentStatus, age, phoneNumber, ); // Call the parent constructor
+                        MembershipType membershipType, MembershipStatus membershipStatus, MemberPaymentStatus memberPaymentStatus, int age, int phoneNumber) {
+        super(memberId, name, email, city, street, region, zipcode, membershipType, membershipStatus, memberPaymentStatus, age, phoneNumber); // Call the parent constructor
     }
 
     /**

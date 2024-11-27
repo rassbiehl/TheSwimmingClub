@@ -1,5 +1,9 @@
-package swimclub.models;
+package swimclub.services;
 
+import swimclub.models.Billing;
+import swimclub.models.BillingStatus;
+import swimclub.models.Member;
+import swimclub.models.MembershipStatus;
 import swimclub.repositories.PaymentRepository;
 
 import java.util.ArrayList;
@@ -22,7 +26,7 @@ public class BillingService {
      * @param member The member whose membership fee is being calculated.
      * @return The calculated membership fee.
      */
-    public double calculateMembershipFee(Member member) {
+    public static double calculateMembershipFee(Member member) {
         if (member.getMembershipStatus() == MembershipStatus.PASSIVE) {
             return 500; // Passive members pay a fixed fee of 500.
         }
@@ -46,13 +50,21 @@ public class BillingService {
      * @param status - whatever status you want to get a list of
      * @return a list of members with a given status.
      */
-    public List<Member> getMembersByPaymentStatus(List<Member> memberList, PaymentStatus status) {
+    public List<Member> getMembersByBillingStatus(List<Member> memberList, BillingStatus status) {
         List<Member> members = new ArrayList<>();
+
         for (Member member : memberList) {
-            if (member.getPaymentStatus() == status) {
+            Boolean x = false;
+            for (Billing billing : member.getBillingsList()) {
+                if (billing.getBillingStatus() == status) {
+                    x = true;
+                }
+            }
+            if (x) {
                 members.add(member);
             }
         }
+
         return members;
     }
 

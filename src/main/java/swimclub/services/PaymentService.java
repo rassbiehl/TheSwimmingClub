@@ -1,9 +1,6 @@
 package swimclub.services;
 
-import swimclub.models.Member;
-import swimclub.models.MembershipStatus;
-import swimclub.models.Payment;
-import swimclub.models.PaymentStatus;
+import swimclub.models.*;
 import swimclub.repositories.MemberRepository;
 import swimclub.repositories.PaymentRepository;
 
@@ -28,14 +25,14 @@ public class PaymentService {
      * @param member       The member whose payment status is being updated.
      * @param paymentStatus The new payment status to set.
      */
-    public void updateMemberPaymentStatus(Member member, PaymentStatus paymentStatus) {
+    public void updateMemberPaymentStatus(Member member, MemberPaymentStatus paymentStatus) {
         if (member == null) {
             throw new IllegalArgumentException("Member cannot be null");
         }
         if (paymentStatus == null) {
             throw new IllegalArgumentException("Payment status cannot be null");
         }
-        member.setPaymentStatus(paymentStatus);
+        member.setMemberPaymentStatus(paymentStatus);
     }
 
     /**
@@ -65,7 +62,7 @@ public class PaymentService {
         savePayment(newPayment);
 
         // Update the member's payment status
-        updateMemberPaymentStatus(member, PaymentStatus.COMPLETE);
+        updateMemberPaymentStatus(member, MemberPaymentStatus.ALL_BILLS_PAID);
 
         System.out.println("Payment of " + amount + " registered for member ID: " + memberId);
     }

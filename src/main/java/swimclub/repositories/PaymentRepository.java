@@ -1,6 +1,7 @@
 package swimclub.repositories;
 
 import swimclub.models.*;
+import swimclub.services.BillingService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -182,7 +183,27 @@ public class PaymentRepository {
         }
 
     }
+    public Billing firstBilling(Member member) {
+        // Generate the bill ID based on the size of the bills list
+        int billId = billings.size() + 1;
 
+        // Get today's date
+        LocalDate today = LocalDate.now();
+
+        // Add 1 week to today's date
+        LocalDate oneWeekFromNow = today.plusWeeks(1);
+
+        // Create a new bill
+        Billing newBill = new Billing(billId, member.getMemberId(), BillingService.calculateMembershipFee(member), oneWeekFromNow, today);
+
+        // Add the bill to the repository
+        billings.add(newBill);
+
+        //adds the new bill to the members billingslist.
+        member.getBillingsList().add(newBill);
+
+        return newBill;
+    }
     /**
      * when this method is used, it's when a bill is paid and you have to give the member another billing with the duedate after one year.
      * it creates a whole new billing object and assigns it to the member.

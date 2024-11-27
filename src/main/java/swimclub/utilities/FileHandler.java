@@ -100,7 +100,7 @@ public class FileHandler {
         return member.getMemberId() + ";" + member.getName() + ";" + member.getEmail() + ";" +
                 member.getCity() + ";" + member.getStreet() + ";" + member.getRegion() + ";" +
                 member.getZipcode() + ";" + member.getAge() + ";" + member.getPhoneNumber() + ";" +
-                membershipDescription + ";" + member.getMembershipStatus() + ";" + member.getPaymentStatus();
+                membershipDescription + ";" + member.getMembershipStatus() + ";" + member.getMemberPaymentStatus();
     }
 
     /**
@@ -129,7 +129,7 @@ public class FileHandler {
         int phoneNumber = parseIntOrDefault(parts[8]);
         String membershipDescription = parts[9];
         MembershipStatus membershipStatus = MembershipStatus.valueOf(parts[10].toUpperCase());
-        PaymentStatus paymentStatus = PaymentStatus.valueOf(parts[11].toUpperCase());
+        MemberPaymentStatus memberPaymentStatus = MemberPaymentStatus.valueOf(parts[11].toUpperCase());
 
         // Parse the membership type
         String[] membershipParts = membershipDescription.split(" ");
@@ -145,10 +145,10 @@ public class FileHandler {
         // Create the correct subclass based on membership level
         if (level == MembershipLevel.JUNIOR) {
             return new JuniorMember(String.valueOf(id), name, email, city, street, region, zipcode,
-                    membershipType, membershipStatus, paymentStatus, age, phoneNumber);
+                    membershipType, membershipStatus, memberPaymentStatus, age, phoneNumber);
         } else {
             return new SeniorMember(String.valueOf(id), name, email, city, street, region, zipcode,
-                    membershipType, membershipStatus, paymentStatus, age, phoneNumber);
+                    membershipType, membershipStatus, memberPaymentStatus, age, phoneNumber);
         }
     }
 

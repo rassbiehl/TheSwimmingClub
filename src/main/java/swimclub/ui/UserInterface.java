@@ -4,6 +4,7 @@ import TreasurerDashboard.TreasurerDashboard;
 import swimclub.controllers.MemberController;
 import swimclub.controllers.PaymentController;
 import swimclub.models.Member;
+import swimclub.models.MemberPaymentStatus;
 import swimclub.models.MembershipStatus;
 import swimclub.models.PaymentStatus;
 
@@ -139,15 +140,11 @@ public class UserInterface {
         // You might need to define default values for membership status and payment status
         // As they are part of the member class, let's use ACTIVE for membership status and PENDING for payment status
         MembershipStatus membershipStatus = MembershipStatus.ACTIVE;  // Assuming the default membership status is ACTIVE
-        PaymentStatus paymentStatus = PaymentStatus.PENDING;  // Default payment status
+        MemberPaymentStatus paymentStatus = MemberPaymentStatus.PENDING_PAYMENT;  // Default payment status
 
         // Call the controller to register the new member
-        Member newMember = memberController.registerMember(name, email, city, street, region, zipcode, membershipType, membershipStatus, paymentStatus ,age, phoneNumber);
+        Member newMember = memberController.registerMember(name, email, city, street, region, zipcode, membershipType, membershipStatus, MemberPaymentStatus.MISSING_PAYMENT ,age, phoneNumber);
 
-        //creates an automatic payment after registering the new member, based on age and membershipstatus.
-        if (newMember != null) {
-            paymentController.registerPayment(newMember.getMemberId(), paymentController.calculateMembershipFeeForMember(newMember.getMemberId()));
-        }
     }
 
     /**
@@ -180,7 +177,7 @@ public class UserInterface {
         // Assuming the membership status is ACTIVE and payment status is PENDING for updates
         // You can update this logic if you want the user to choose these attributes
         MembershipStatus membershipStatus = MembershipStatus.ACTIVE;  // Default to ACTIVE
-        PaymentStatus paymentStatus = PaymentStatus.PENDING;  // Default to PENDING
+        MemberPaymentStatus paymentStatus = MemberPaymentStatus.PENDING_PAYMENT;  // Default to PENDING
 
         // Call the controller's updateMember method with all new attributes
         memberController.updateMember(memberId, name, email, age, city, street, region, zipcode, membershipType,  membershipStatus, paymentStatus, phoneNumber);
@@ -259,9 +256,11 @@ public class UserInterface {
         int memberId = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter payment amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
+        System.out.print("Enter billing Id: ");
+        int billingId = Integer.parseInt(scanner.nextLine());
 
         // Call the PaymentController to register the payment
-        paymentController.registerPayment(memberId, amount);
+        paymentController.registerMemberPayment(memberId, amount, billingId);
     }
 
     /**
@@ -272,7 +271,7 @@ public class UserInterface {
         int memberId = Integer.parseInt(scanner.nextLine());
 
         // Call the PaymentController to view payments for the member
-        paymentController.viewPaymentsForMember(memberId);
+        paymentController.returnPaymentsForMember(memberId);
     }
     //
     private void viewPaymentSummary() {

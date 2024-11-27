@@ -17,10 +17,11 @@ public abstract class Member {
     private int zipcode;                 // Zip code number of the member
     private MembershipType membershipType; // Membership type (e.g., Competitive Junior)
     private MembershipStatus membershipStatus; // Membership status (active/passive)
-    private PaymentStatus paymentStatus; // Payment status
+    private MemberPaymentStatus memberPaymentStatus; // Payment status
     private int age;                     // Age of the member
     private int phoneNumber;             // Phone number of the member
     private List<Billing> billingsList;
+    private List<Payment> paymentList;
 
     /**
      * Constructor for initializing a Member object.
@@ -34,15 +35,14 @@ public abstract class Member {
      * @param zipcode          Living zip code of the member
      * @param membershipType   The membership type of the member.
      * @param membershipStatus The membership status of the member.
-     * @param paymentStatus    Payment status type of the member.
+     * @param memberPaymentStatus    Payment status type of the member.
      * @param age              Age of the member.
      * @param phoneNumber      Phone number of the member.
-     * @param firstBill
      */
 
     //constructor
     public Member(String memberId, String name, String email, String city, String street,
-                  String region, int zipcode, MembershipType membershipType, MembershipStatus membershipStatus, PaymentStatus paymentStatus, int age, int phoneNumber, Billing firstBill) {
+                  String region, int zipcode, MembershipType membershipType, MembershipStatus membershipStatus, MemberPaymentStatus memberPaymentStatus, int age, int phoneNumber) {
         this.memberId = Integer.parseInt(memberId); // Parse memberId from String to int
         this.name = name;
         this.email = email;
@@ -52,11 +52,11 @@ public abstract class Member {
         this.zipcode =  zipcode;
         this.membershipType = membershipType;
         this.membershipStatus = membershipStatus;
-        this.paymentStatus = paymentStatus;
+        this.memberPaymentStatus = memberPaymentStatus;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.billingsList = new ArrayList<Billing>();
-        this.billingsList.add(firstBill);
+        this.paymentList = new ArrayList<Payment>();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -115,6 +115,13 @@ public abstract class Member {
         return this.zipcode;
     }
 
+    public List<Billing> getBillingsList () {
+        return this.billingsList;
+    }
+    public List<Payment> getPaymentList () {
+        return this.paymentList;
+    }
+
     /**
      * @return The membership type of the member as a descriptive string.
      */
@@ -127,8 +134,8 @@ public abstract class Member {
         return this.membershipStatus;
     }
 
-    public PaymentStatus getPaymentStatus () {
-        return this.paymentStatus;
+    public MemberPaymentStatus getMemberPaymentStatus () {
+        return this.memberPaymentStatus;
     }
 
 
@@ -221,8 +228,8 @@ public abstract class Member {
     public void setMembershipStatus(MembershipStatus membershipStatus) {
         this.membershipStatus = membershipStatus;
 
-    } public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
+    } public void setMemberPaymentStatus(MemberPaymentStatus paymentStatus) {
+        this.memberPaymentStatus = paymentStatus;
     }
 
 
