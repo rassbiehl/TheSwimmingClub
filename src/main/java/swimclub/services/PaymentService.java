@@ -111,14 +111,14 @@ public class PaymentService {
             return;
         }
 
-        // Create a new payment instance with a unique ID and status set to PENDING
-        Payment newPayment = new Payment(paymentRepository.getNextPaymentId(), PaymentStatus.PENDING, member, LocalDate.now(), amount);
+        // Create a new payment instance with a unique ID and status set to COMPLETE
+        Payment newPayment = new Payment(paymentRepository.getNextPaymentId(), PaymentStatus.COMPLETE, member, LocalDate.now(), amount);
 
         // Save the payment to the repository
         savePayment(newPayment);
 
         // Update the member's payment status
-        updateMemberPaymentStatus(member, PaymentStatus.PENDING);
+        updateMemberPaymentStatus(member, PaymentStatus.COMPLETE);
         System.out.println("Payment of " + amount + " registered for member ID: " + memberId);
     }
 
