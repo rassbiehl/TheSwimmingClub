@@ -25,7 +25,7 @@ public class JuniorMember extends Member {
      */
     public JuniorMember(String memberId, String name, String email, String city, String street, String region, int zipcode,
                         MembershipType membershipType, MembershipStatus membershipStatus, PaymentStatus paymentStatus, int age, int phoneNumber) {
-        super(memberId, name, email, city, street, region, zipcode, membershipType,membershipStatus,paymentStatus, age, phoneNumber); // Call the parent constructor
+        super(memberId, name, email, city, street, region, zipcode, membershipType,membershipStatus,paymentStatus, age, phoneNumber, ); // Call the parent constructor
     }
 
     /**

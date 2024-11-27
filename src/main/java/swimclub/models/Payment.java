@@ -7,7 +7,8 @@ public class Payment {
     private PaymentStatus paymentStatus;  // COMPLETE, PENDING, FAILED
     private Member member;                // Member associated with the payment
     private LocalDate paymentDate;        // Date of payment
-    private double amountPerYear;         // Annual membership fee
+    private double amount;         // Annual membership fee
+    private int billingId;               // the id of the bill the payment is made towards.
 
     /**
      * Constructor for Payment.
@@ -16,13 +17,14 @@ public class Payment {
      * @param paymentStatus Status of the payment (COMPLETE, PENDING, FAILED).
      * @param member        Member associated with the payment.
      * @param paymentDate   Date of the payment.
-     * @param amountPerYear Annual membership fee.
+     * @param amount Annual membership fee.
+     * @param billingId     the id of the bill the payment is sent towards.
      * @throws IllegalArgumentException If amount is not positive.
      * @throws NullPointerException     If member or paymentDate is null.
      */
-    public Payment(int paymentId, PaymentStatus paymentStatus, Member member, LocalDate paymentDate, double amountPerYear) {
-        if (amountPerYear <= 0) {
-            throw new IllegalArgumentException("Amount per year must be positive.");
+    public Payment(int paymentId, PaymentStatus paymentStatus, Member member, LocalDate paymentDate, double amount, int billingId) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be positive.");
         }
 
         if (member == null) {
@@ -36,8 +38,9 @@ public class Payment {
         this.paymentId = paymentId;
         this.paymentStatus = paymentStatus;
         this.member = member;
-        this.amountPerYear = amountPerYear;
+        this.amount = amount;
         this.paymentDate = paymentDate;
+        this.billingId = billingId;
     }
 
     // Get Methods
@@ -57,9 +60,7 @@ public class Payment {
         return paymentDate;
     }
 
-    public double getAmountPerYear() {
-        return amountPerYear;
-    }
+    public double getAmount() {return this.amount;}
 
     // Set Methods
     public void setPaymentId(int paymentId) {
@@ -84,13 +85,6 @@ public class Payment {
         this.member = member;
     }
 
-    public void setAmountPerYear(double amountPerYear) {
-        if (amountPerYear <= 0) {
-            throw new IllegalArgumentException("Amount per year must be positive");
-        }
-        this.amountPerYear = amountPerYear;
-    }
-
     /**
      * Provides a detailed string representation of the payment.
      *
@@ -102,8 +96,9 @@ public class Payment {
                 "Payment ID: " + paymentId +
                 ", Member: " + member.getName() +
                 ", Payment Date: " + paymentDate +
-                ", Amount: $" + amountPerYear +
+                ", Amount: $" + amount +
                 ", Status: " + paymentStatus +
+                ", Billing ID: " + billingId +
                 "}";
     }
 }

@@ -1,5 +1,8 @@
 package swimclub.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Abstract base class representing a member.
  * Contains common attributes and methods for all members in the swim club.
@@ -17,27 +20,29 @@ public abstract class Member {
     private PaymentStatus paymentStatus; // Payment status
     private int age;                     // Age of the member
     private int phoneNumber;             // Phone number of the member
+    private List<Billing> billingsList;
 
     /**
      * Constructor for initializing a Member object.
      *
-     * @param memberId       Unique ID of the member (parsed as int).
-     * @param name           Full name of the member.
-     * @param city           Living city of the member
-     * @param region         Living region of the member
-     * @param street         Living street of the member
-     * @param zipcode        Living zip code of the member
-     * @param email          Email address of the member.
-     * @param membershipType The membership type of the member.
+     * @param memberId         Unique ID of the member (parsed as int).
+     * @param name             Full name of the member.
+     * @param email            Email address of the member.
+     * @param city             Living city of the member
+     * @param street           Living street of the member
+     * @param region           Living region of the member
+     * @param zipcode          Living zip code of the member
+     * @param membershipType   The membership type of the member.
      * @param membershipStatus The membership status of the member.
-     * @param paymentStatus  Payment status type of the member.
-     * @param age            Age of the member.
-     * @param phoneNumber    Phone number of the member.
+     * @param paymentStatus    Payment status type of the member.
+     * @param age              Age of the member.
+     * @param phoneNumber      Phone number of the member.
+     * @param firstBill
      */
 
     //constructor
     public Member(String memberId, String name, String email, String city, String street,
-                  String region, int zipcode,MembershipType membershipType, MembershipStatus membershipStatus, PaymentStatus paymentStatus, int age, int phoneNumber) {
+                  String region, int zipcode, MembershipType membershipType, MembershipStatus membershipStatus, PaymentStatus paymentStatus, int age, int phoneNumber, Billing firstBill) {
         this.memberId = Integer.parseInt(memberId); // Parse memberId from String to int
         this.name = name;
         this.email = email;
@@ -50,6 +55,8 @@ public abstract class Member {
         this.paymentStatus = paymentStatus;
         this.age = age;
         this.phoneNumber = phoneNumber;
+        this.billingsList = new ArrayList<Billing>();
+        this.billingsList.add(firstBill);
     }
 
     // -----------------------------------------------------------------------------------------------------
