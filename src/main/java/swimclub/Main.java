@@ -1,6 +1,6 @@
 package swimclub;
 
-import TreasurerDashboard.TreasurerDashboard;
+import swimclub.models.TreasurerDashboard;
 import swimclub.controllers.MemberController;
 import swimclub.controllers.PaymentController;
 import swimclub.repositories.MemberRepository;
